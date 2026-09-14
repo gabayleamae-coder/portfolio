@@ -201,3 +201,22 @@
 
     animate();
 })();
+
+// --- Skill Progress Bar Animation ---
+document.querySelectorAll('.skill-progress').forEach((bar) => {
+    const targetWidth = bar.style.width;
+    bar.style.width = '0%';
+    // Use IntersectionObserver to animate when scrolled into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.2s ease';
+                    bar.style.width = targetWidth;
+                }, 200);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    observer.observe(bar);
+});
