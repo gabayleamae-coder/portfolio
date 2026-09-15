@@ -6,48 +6,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Developer Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
+    <!-- Full 3D Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
     <!-- Header / Navigation -->
     <header>
         <nav>
-            <div class="logo">MyPortfolio</div>
-            <ul class="nav-links">
-                <li><a href="#Home">Home</a></li>
-                <li><a href="#about">Abouts</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="logo">LM</div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+                    <i class="fa-regular fa-sun"></i>
+                </button>
+            </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="hero">
-        <canvas id="hero-canvas"></canvas>
-        <div class="hero-content">
-            <h1>Hi, I'm Lea</h1>
-            <p>I build beautiful and responsive websites.</p>
-            <div class="hero-socials">
-                <a href="mailto:your.email@gmail.com" target="_blank" title="Email"><i
-                        class="fa-solid fa-envelope"></i></a>
-                <a href="https://facebook.com" target="_blank" title="Facebook"><i
-                        class="fa-brands fa-facebook"></i></a>
-                <a href="https://instagram.com" target="_blank" title="Instagram"><i
-                        class="fa-brands fa-instagram"></i></a>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-name">Lea <br>Gabay</h1>
+                <div class="hero-role-tag">Aspiring Software Engineer!</div>
+                <p class="hero-bio">
+                    A Computer Science student and an aspiring software engineer. I highly value continuous learning and innovation, with a strong belief in the power of technology to create meaningful impact.
+                </p>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn-primary">View Projects</a>
+                    <a href="#contact" class="btn-secondary">Get in Touch <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
             </div>
-            <a href="#contact" class="cta-button">Get in Touch</a>
+            <div class="hero-avatar-wrapper">
+                <div class="hero-avatar-circle" id="hero-avatar">
+                    <img src="hero_image.jpg" alt="Lea Mae Gabay" class="hero-avatar-img">
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Floating CV Button -->
+    <a href="#contact" class="floating-cv-btn" title="Download CV">
+        <i class="fa-solid fa-file-pdf"></i>
+        <span>CV</span>
+    </a>
+
     <!-- About Section -->
     <section id="about">
-        <h2>About Me</h2>
-        <p>I am passionate about coding and learning new technologies. I love turning complex problems into simple,
-            beautiful, and intuitive interface designs.</p>
+        <div class="section-label">ABOUT</div>
+        <div class="about-container">
+            <div class="about-bio">
+                <p>
+                    I am a <strong>BS Information Technology</strong> graduate from Central Philippine State University, graduating with the distinction of <strong>Magna Cum Laude</strong>.
+                </p>
+                <p>
+                    My background is rooted in self-driven development. I have hands-on experience delivering paid, production-ready billing systems as a solo developer, handling everything from requirements gathering to full deployment.
+                </p>
+                <p>
+                    I specialize in the entire development lifecycle, with a strong focus on <strong>AI and Automation</strong>. I build robust full-stack web apps, automation pipelines using tools like n8n, and integrate AI-assisted workflows to solve real-world problems.
+                </p>
+                <p class="about-status">
+                    Currently open for freelance web and mobile development projects, as well as full-time opportunities where I can contribute my modern approach to software engineering and commitment to building high-quality, functional systems.
+                </p>
+            </div>
+            <div class="about-cards-grid">
+                <div class="about-card">
+                    <h3>Magna Cum Laude</h3>
+                    <div class="about-card-label">ACADEMIC HONOR</div>
+                </div>
+                <div class="about-card">
+                    <h3>AI Certified</h3>
+                    <div class="about-card-label">GOOGLE, IBM & MICROSOFT</div>
+                </div>
+                <div class="about-card">
+                    <h3>Solo Developer</h3>
+                    <div class="about-card-label">FREELANCE SYSTEM</div>
+                </div>
+                <div class="about-card">
+                    <h3>Dean's Lister</h3>
+                    <div class="about-card-label">DEGREE DISTINCTION</div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Skills Section -->
@@ -107,20 +157,70 @@
 
     <!-- Contact Section -->
     <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Interested in working together? Let's connect!</p>
+        <div class="section-label">CONTACT</div>
+        <h2 class="contact-heading">Let's build something.</h2>
+        <p class="contact-subtext">
+            Currently open for freelance web and mobile development projects, as well as full-time opportunities.
+        </p>
+        <div class="contact-location">CAMARINES SUR, BICOL, PHILIPPINES</div>
 
-        <div class="contact-links">
-            <a href="mailto:your.email@gmail.com" class="contact-link" target="_blank">✉️ Email</a>
-            <a href="tel:+1234567890" class="contact-link">📞 Phone</a>
-            <a href="https://facebook.com/yourprofile" class="contact-link" target="_blank">📘 Facebook</a>
+        <div class="contact-grid">
+            <!-- Card 1: EMAIL -->
+            <div class="contact-card copyable" data-copy="gabayleamae@gmail.com">
+                <div class="contact-card-header">
+                    <div class="contact-icon-box">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <button class="copy-btn" title="Copy Email" aria-label="Copy Email">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+                <div class="contact-card-label">EMAIL</div>
+                <div class="contact-card-value">gabayleamae@gmail.com</div>
+            </div>
+
+            <!-- Card 2: GITHUB -->
+            <a href="https://github.com/gabayleamae" target="_blank" class="contact-card contact-card-link">
+                <div class="contact-card-header">
+                    <div class="contact-icon-box">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div class="link-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </div>
+                <div class="contact-card-label">GITHUB</div>
+                <div class="contact-card-value">github.com/gabayleamae-coder</div>
+            </a>
+
+            <!-- Card 3: LINKEDIN -->
+            <a href="https://linkedin.com/in/leamaegabay" target="_blank" class="contact-card contact-card-link">
+                <div class="contact-card-header">
+                    <div class="contact-icon-box">
+                        <i class="fa-solid fa-link"></i>
+                    </div>
+                    <div class="link-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </div>
+                <div class="contact-card-label">LINKEDIN</div>
+                <div class="contact-card-value">linkedin.com/in/leamaegabay</div>
+            </a>
+
+            <!-- Card 4: PHONE -->
+            <div class="contact-card copyable" data-copy="09949704783">
+                <div class="contact-card-header">
+                    <div class="contact-icon-box">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <button class="copy-btn" title="Copy Phone Number" aria-label="Copy Phone Number">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+                <div class="contact-card-label">PHONE</div>
+                <div class="contact-card-value">0994 970 4783</div>
+            </div>
         </div>
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
     </section>
 
     <!-- Footer -->
