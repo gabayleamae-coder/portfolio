@@ -9,10 +9,12 @@
 }
 
 :root {
-    --bg-color: #0f0f11;       /* Deep matte black / dark obsidian */
+    --bg-color: #0f0f11;
+    /* Deep matte black / dark obsidian */
     --text-main: #fcfcfc;
     --text-muted: #94949e;
-    --accent: #f59e0b;         /* Warm amber accent from reference */
+    --accent: #f59e0b;
+    /* Warm amber accent from reference */
     --accent-hover: #d97706;
     --card-bg: rgba(24, 24, 27, 0.7);
     --glass-border: rgba(255, 255, 255, 0.08);
@@ -706,7 +708,8 @@ h2::after {
     background: rgba(255, 255, 255, 0.03);
 }
 
-.copy-btn, .link-arrow {
+.copy-btn,
+.link-arrow {
     background: transparent;
     border: none;
     color: #71717a;
@@ -715,7 +718,8 @@ h2::after {
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.copy-btn:hover, .contact-card-link:hover .link-arrow {
+.copy-btn:hover,
+.contact-card-link:hover .link-arrow {
     color: #ffffff;
     transform: scale(1.1);
 }
