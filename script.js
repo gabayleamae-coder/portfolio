@@ -165,9 +165,9 @@
             petal.rotation.y += petal.userData.rotSpeedY;
             petal.rotation.z += petal.userData.rotSpeedZ;
 
-            // Wrap around bottom to top relative to camera position
-            if (petal.position.y < camera.position.y - 35) {
-                petal.position.y = camera.position.y + 35;
+            // Wrap around bottom to top relative to hero section (fixed Y)
+            if (petal.position.y < -35) {
+                petal.position.y = 35;
                 petal.position.x = (Math.random() - 0.5) * 65;
             }
         });
