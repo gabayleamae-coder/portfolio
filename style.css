@@ -151,16 +151,6 @@ h2::after {
     padding-top: 130px;
 }
 
-#bg-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-}
-
 .hero-container {
     display: flex;
     align-items: center;
