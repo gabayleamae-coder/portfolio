@@ -20,18 +20,30 @@ if (avatar) {
     });
 }
 
-// --- Theme Toggle Handler ---
-const themeBtn = document.getElementById('theme-toggle');
-if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-        const icon = themeBtn.querySelector('i');
-        if (icon.classList.contains('fa-sun')) {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
+// --- Mobile Menu Toggle ---
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-xmark');
         } else {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
         }
+    });
+    
+    // Close menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        });
     });
 }
 

@@ -85,23 +85,23 @@ nav {
     color: var(--text-main);
 }
 
-/* Theme Toggle Icon Button */
-.theme-toggle-btn {
+/* Mobile Menu Icon Button */
+.mobile-menu-btn {
     width: 38px;
     height: 38px;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: transparent;
     color: var(--text-muted);
-    display: flex;
     align-items: center;
     justify-content: center;
     cursor: url('cursor.png'), pointer;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     transition: all 0.2s ease;
+    display: none; /* Hidden on desktop */
 }
 
-.theme-toggle-btn:hover {
+.mobile-menu-btn:hover {
     color: #fff;
     border-color: rgba(255, 255, 255, 0.35);
     transform: scale(1.05);
@@ -765,8 +765,28 @@ footer {
         padding: 18px 24px;
     }
 
+    .mobile-menu-btn {
+        display: flex;
+    }
+
     .nav-links {
-        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 15, 17, 0.98);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 0;
+        gap: 24px;
+        border-bottom: 1px solid var(--glass-border);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: clip-path 0.3s ease-in-out;
+    }
+
+    .nav-links.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     }
 
     .hero-container {
