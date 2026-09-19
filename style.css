@@ -5,7 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-family: 'Outfit', sans-serif;
 }
 
 :root {
@@ -175,7 +175,6 @@ h2::after {
     letter-spacing: -2.5px;
     color: #ffffff;
     margin-bottom: 24px;
-    font-family: 'Times New Roman', Times, serif;
 }
 
 .hero-role-tag {
@@ -740,7 +739,6 @@ h2::after {
 }
 
 .contact-card-value {
-    font-family: 'Fira Code', 'Courier New', monospace;
     font-size: 1rem;
     font-weight: 500;
     color: #ffffff;
