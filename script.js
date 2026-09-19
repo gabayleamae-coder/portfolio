@@ -84,3 +84,86 @@ document.querySelectorAll('.contact-card.copyable').forEach((card) => {
         }
     });
 });
+
+// --- Skills Fisheye Effect (Auto & Interactive) ---
+const skillsGrid = document.querySelector('.skills-grid');
+const skillCards = document.querySelectorAll('.skill-card');
+
+if (skillsGrid && skillCards.length > 0) {
+    let animationFrameId;
+    let isMouseOver = false;
+    let mouseX = 0;
+    let mouseY = 0;
+    let isVisible = false;
+
+    // Only run animation when section is visible for performance
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            isVisible = entry.isIntersecting;
+            if (isVisible) {
+                renderFisheye();
+            } else {
+                cancelAnimationFrame(animationFrameId);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    observer.observe(skillsGrid);
+
+    function renderFisheye() {
+        if (!isVisible) return;
+
+        const gridRect = skillsGrid.getBoundingClientRect();
+        let focalX, focalY;
+
+        if (isMouseOver) {
+            focalX = mouseX;
+            focalY = mouseY;
+        } else {
+            // Auto wave calculation
+            const time = Date.now() / 1500; // Speed of the wave
+            const sweep = (Math.sin(time) + 1) / 2; // 0 to 1
+            focalX = gridRect.left + (gridRect.width * sweep);
+            focalY = gridRect.top + (gridRect.height / 2);
+        }
+        
+        skillCards.forEach(card => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenterX = cardRect.left + cardRect.width / 2;
+            const cardCenterY = cardRect.top + cardRect.height / 2;
+            
+            const distX = focalX - cardCenterX;
+            const distY = focalY - cardCenterY;
+            const distance = Math.sqrt(distX * distX + distY * distY);
+            
+            const maxDistance = 350; 
+            let scale = 1;
+            
+            if (distance < maxDistance) {
+                const influence = Math.pow(1 - (distance / maxDistance), 1.2);
+                scale = 1 + (influence * 0.15); 
+            }
+            
+            const isHovered = card.matches(':hover');
+            const translateY = isHovered ? -10 : 0;
+            
+            card.style.transition = 'transform 0.1s ease-out, box-shadow 0.4s ease, border-color 0.4s ease';
+            card.style.transform = `translateY(${translateY}px) scale(${scale})`;
+            card.style.zIndex = isHovered ? 10 : (scale > 1.05 ? 5 : 1);
+        });
+        
+        animationFrameId = requestAnimationFrame(renderFisheye);
+    }
+
+    if (window.matchMedia("(pointer: fine)").matches) {
+        skillsGrid.addEventListener('mousemove', (e) => {
+            isMouseOver = true;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        skillsGrid.addEventListener('mouseleave', () => {
+            isMouseOver = false;
+        });
+    }
+}
