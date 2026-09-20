@@ -1,24 +1,5 @@
-// --- 3D Parallax Tilt Effect on Avatar ---
-const avatar = document.getElementById('hero-avatar');
-if (avatar) {
-    document.addEventListener('mousemove', (e) => {
-        const rect = avatar.getBoundingClientRect();
-        const avatarX = rect.left + rect.width / 2;
-        const avatarY = rect.top + rect.height / 2;
+// --- 3D Parallax Tilt Effect on Avatar (disabled) ---
 
-        const distX = (e.clientX - avatarX) / (window.innerWidth / 2);
-        const distY = (e.clientY - avatarY) / (window.innerHeight / 2);
-
-        const tiltX = -distY * 12;
-        const tiltY = distX * 12;
-
-        avatar.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-    });
-
-    avatar.addEventListener('mouseleave', () => {
-        avatar.style.transform = `rotateX(0deg) rotateY(0deg)`;
-    });
-}
 
 // --- Mobile Menu Toggle ---
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -133,3 +114,59 @@ if (marqueeContainer && skillPills.length > 0) {
     }
 }
 
+// --- GitHub Contributions Graph ---
+(async function renderGitHubGraph() {
+    const graphEl = document.getElementById('github-graph');
+
+    if (!graphEl) return;
+
+    const GITHUB_USERNAME = 'gabayleamae-coder';
+    const API_URL = `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`;
+    const LEVEL_CLASSES = ['github-dot-empty', 'github-dot-l1', 'github-dot-l2', 'github-dot-l3', 'github-dot-l4'];
+
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        const allContributions = data.contributions;
+
+        // 1. Sort chronologically
+        allContributions.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        // 2. Filter to last 365 days up to today
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const oneYearAgo = new Date(today);
+        oneYearAgo.setDate(oneYearAgo.getDate() - 364);
+
+        const days = allContributions.filter(d => {
+            const date = new Date(d.date);
+            return date >= oneYearAgo && date <= today;
+        });
+
+        // 3. Add invisible padding dots so columns align Sun-Sat
+        const firstDayOfWeek = new Date(days[0].date).getDay(); // 0=Sun
+        const dots = [];
+
+        for (let i = 0; i < firstDayOfWeek; i++) {
+            dots.push('<span class="github-dot github-dot-hidden"></span>');
+        }
+
+        // 4. Render the graph dots
+        days.forEach(day => {
+            const level = Math.min(day.level, 4);
+            const cls = LEVEL_CLASSES[level];
+            dots.push(`<span class="github-dot ${cls}" title="${day.date}: ${day.count} contribution${day.count !== 1 ? 's' : ''}"></span>`);
+        });
+
+        graphEl.innerHTML = dots.join('');
+
+        // 5. Auto-scroll to the right (most recent)
+        const scrollContainer = document.querySelector('.contributions-scroll');
+        if (scrollContainer) {
+            scrollContainer.scrollLeft = scrollContainer.scrollWidth;
+        }
+
+    } catch (error) {
+        console.error('Failed to fetch GitHub contributions:', error);
+    }
+})();

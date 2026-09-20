@@ -291,6 +291,12 @@ h2::after {
     object-fit: contain;
     filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.7));
     transition: transform 0.4s ease, filter 0.4s ease;
+    mask-image: linear-gradient(to bottom, black 60%, transparent 98%),
+                linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 98%),
+                        linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-composite: intersect;
+    -webkit-mask-composite: destination-in;
 }
 
 .hero-avatar-container:hover .hero-avatar-img {
@@ -433,7 +439,7 @@ h2::after {
 }
 
 .skills-marquee-container {
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -443,9 +449,6 @@ h2::after {
     /* Edge fade masks */
     mask-image: linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 18%, black 82%, transparent 100%);
-    /* Allow it to bleed to edges */
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .marquee-track {
@@ -473,13 +476,10 @@ h2::after {
     display: flex;
     align-items: center;
     gap: 12px;
-    background: rgba(24, 24, 27, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px dashed rgba(255, 255, 255, 0.15); 
+    background: transparent;
+    border: none;
     padding: 14px 24px;
-    border-radius: 999px; 
-    font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text-main);
     white-space: nowrap;
     cursor: url('cursor.png'), default;
@@ -487,8 +487,7 @@ h2::after {
 }
 
 .skill-pill:hover {
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    background: rgba(39, 39, 42, 0.9);
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
 }
 
 .skill-pill i {
@@ -503,25 +502,142 @@ h2::after {
 }
 
 .contributions-container {
-    background: rgba(24, 24, 27, 0.65);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent;
+    border: none;
     border-radius: 20px;
     padding: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: auto;
     width: 100%;
     margin-top: 10px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
-.github-chart {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    min-width: 300px;
+.contributions-header {
+    margin-bottom: 20px;
+}
+
+.contributions-total {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.contributions-graph-wrapper {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.contributions-day-labels {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: 24px;
+    flex-shrink: 0;
+}
+
+.contributions-day-labels span {
+    height: 13px;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.contributions-scroll {
+    overflow-x: auto;
+    flex-grow: 1;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+
+.contributions-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.contributions-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.contributions-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
+
+.contributions-month-labels {
+    display: flex;
+    gap: 0;
+    margin-bottom: 6px;
+    height: 18px;
+}
+
+.contributions-month-labels span {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-align: left;
+}
+
+.github-graph {
+    display: grid;
+    grid-template-rows: repeat(7, 13px);
+    grid-auto-flow: column;
+    grid-auto-columns: 13px;
+    gap: 3px;
+}
+
+.github-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    transition: transform 0.15s ease;
+}
+
+.github-dot:hover {
+    transform: scale(1.4);
+    z-index: 5;
+    position: relative;
+}
+
+.github-dot-empty {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.github-dot-l1 {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.github-dot-l2 {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.github-dot-l3 {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.github-dot-l4 {
+    background-color: #ffffff;
+}
+
+.github-dot-hidden {
+    visibility: hidden;
+}
+
+.contributions-legend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    margin-top: 16px;
+}
+
+.contributions-legend .github-dot {
+    width: 11px;
+    height: 11px;
+}
+
+.legend-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin: 0 4px;
 }
 
 /* ==========================================
