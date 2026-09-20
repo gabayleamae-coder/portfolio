@@ -860,10 +860,41 @@ h2::after {
    FOOTER
    ========================================== */
 footer {
-    text-align: center;
-    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 60px;
     border-top: 1px solid var(--glass-border);
     color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-socials a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.footer-socials a:hover {
+    color: var(--text-main);
+}
+
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 24px;
+        text-align: center;
+    }
 }
 
 /* ==========================================
